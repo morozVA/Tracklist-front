@@ -1,0 +1,90 @@
+<div class="container">
+
+  <h1 class="mt-5 mb-5 text-center">{{ title }}</h1>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Filter</span>
+      </h4>
+
+      <form #f="ngForm" (ngSubmit)="onSubmit()" class="card p-2" action="#" method="get">
+        <div class="form-group">
+          <label for="Singer">Singer/band</label>
+          <select ng-init="selectedSinger = singerList[0]" name="Singer" [(ngModel)]="selectedSinger"
+                  (ngModelChange)="onChangeSinger($event)" class="form-control" id="Singer">
+            <option value="All">All</option>
+            <option *ngFor="let singer of singerList" [ngValue]="singer">{{ singer.singer }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Genre">Genre</label>
+          <select name="Genre" [(ngModel)]="selectedGenre" (ngModelChange)="onChangeGenre($event)" class="form-control"
+                  id="Genre">
+            <option value="All">All</option>
+            <option *ngFor="let genre of genreList" [ngValue]="genre">{{ genre.genre }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Year">Year</label>
+          <select name="Year" [(ngModel)]="selectedYear" (ngModelChange)="onChangeYear($event)" class="form-control"
+                  id="Year">
+            <option value="All">All</option>
+            <option *ngFor="let year of yearList" [ngValue]="year">{{ year.year }}</option>
+          </select>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-md-8 order-md-1">
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Playlist</span>
+      </h4>
+
+      <table id="example" datatables="ng" class="d-none row-border hover">
+        <thead>
+        <tr>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+              aria-label="Track">Track
+          </th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+              aria-label="Singer/Band">Singer/Band
+          </th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+              aria-label="Genre">Genre
+          </th>
+          <th class="nosort">Year
+          </th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+              aria-label="Duration">Duration
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr role="row" *ngFor="let track of trackList">
+          <td class="sorting_1">{{track.track}}</td>
+          <td class="sorting_1">{{track.singer}}</td>
+          <td class="sorting_1">{{track.genre}}</td>
+          <td class="sorting_1">{{track.year}}</td>
+          <td class="sorting_1">{{track.duration}}</td>
+        </tr>
+
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>Track</th>
+          <th>Singer/Band</th>
+          <th>Genre</th>
+          <th>Year</th>
+          <th>Duration</th>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+
+</div>
