@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   onChangeSinger($event) {
     var table = $('#example').DataTable();
-    if ($event.singer !== undefined) {
+    if ($event.singer) {
       table.column(0).search('', true, false).column(1).search($event.singer, true, false).draw();
     } else {
       table.column(0).search('', true, false).column(1).search('', true, false).draw();
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeGenre($event) {
-    if ($event.genre !== undefined) {
+    if ($event.genre) {
       var table = $('#example').DataTable();
       table.column(0).search('', true, false).column(2).search($event.genre, true, false).draw();
     } else {
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeYear($event) {
-    if ($event.year !== undefined) {
+    if ($event.year) {
       var table = $('#example').DataTable();
       table.column(0).search('', true, false).column(3).search($event.year, true, false).draw();
     } else {
