@@ -55,8 +55,8 @@ export class AppComponent implements OnInit {
   }
 
   onChangeGenre($event) {
+    var table = $('#example').DataTable();
     if ($event.genre) {
-      var table = $('#example').DataTable();
       table.column(0).search('', true, false).column(2).search($event.genre, true, false).draw();
     } else {
       table.column(0).search('', true, false).column(2).search('', true, false).draw();
@@ -64,8 +64,8 @@ export class AppComponent implements OnInit {
   }
 
   onChangeYear($event) {
+    var table = $('#example').DataTable();
     if ($event.year) {
-      var table = $('#example').DataTable();
       table.column(0).search('', true, false).column(3).search($event.year, true, false).draw();
     } else {
       table.column(0).search('', true, false).column(3).search('', true, false).draw();
