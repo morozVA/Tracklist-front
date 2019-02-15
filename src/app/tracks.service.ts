@@ -10,7 +10,7 @@ export class TracksService {
 
   getTracks() {
     const url = 'http://back.cb18039.tmweb.ru/web/';
-    return this.httpClient.get(url);
+    return this.httpClient.get<any>(url);
   }
 
 }

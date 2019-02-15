@@ -8,57 +8,67 @@ import {TracksService} from './tracks.service';
   providers: [TracksService]
 })
 
+
 export class AppComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
+  playlist;
+  genreList;
+  singerList;
+  yearList;
+  selectedSinger;
+  selectedGenre;
+  selectedYear;
+  onSubmit;
 
   constructor(private TracksService: TracksService) {
   }
 
   ngOnInit() {
     this.TracksService.getTracks().subscribe(trackList => {
-      this.trackList = trackList.playlist;
+
+      this.playlist = trackList.playlist;
       this.genreList = trackList.genreList;
       this.singerList = trackList.singerList;
       this.yearList = trackList.yearList;
 
       $(function () {
-        const table = $('#example').DataTable({
-          'lengthMenu': [[10, 20, -1], [10, 20, 'All']],
-          'order': [[1, 'asc']],
-          'aoColumnDefs': [{
-            'bSortable': false,
-            'aTargets': ['nosort']
-          }]
+        $('#example').DataTable({
+          lengthMenu: [[10, 20, -1], [10, 20, 'All']],
+          order: [[1, 'asc']],
         });
-        window.table = table;
+
         $('#example').removeClass('d-none');
+
       });
 
     });
   }
 
   onChangeSinger($event) {
+    var table = $('#example').DataTable();
     if ($event.singer !== undefined) {
-      window.table.column(0).search('', true, false).column(1).search($event.singer, true, false).draw();
+      table.column(0).search('', true, false).column(1).search($event.singer, true, false).draw();
     } else {
-      window.table.column(0).search('', true, false).column(1).search('', true, false).draw();
+      table.column(0).search('', true, false).column(1).search('', true, false).draw();
     }
   }
 
   onChangeGenre($event) {
     if ($event.genre !== undefined) {
-      window.table.column(0).search('', true, false).column(2).search($event.genre, true, false).draw();
+      var table = $('#example').DataTable();
+      table.column(0).search('', true, false).column(2).search($event.genre, true, false).draw();
     } else {
-      window.table.column(0).search('', true, false).column(2).search('', true, false).draw();
+      table.column(0).search('', true, false).column(2).search('', true, false).draw();
     }
   }
 
   onChangeYear($event) {
     if ($event.year !== undefined) {
-      window.table.column(0).search('', true, false).column(3).search($event.year, true, false).draw();
+      var table = $('#example').DataTable();
+      table.column(0).search('', true, false).column(3).search($event.year, true, false).draw();
     } else {
-      window.table.column(0).search('', true, false).column(3).search('', true, false).draw();
+      table.column(0).search('', true, false).column(3).search('', true, false).draw();
     }
   }
 
